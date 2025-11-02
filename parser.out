@@ -1,0 +1,1863 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     program -> function_def
+Rule 3     function_def -> FN NAME LPAREN param_list RPAREN ret_type block
+Rule 4     param_list -> param_list COMMA param
+Rule 5     param_list -> param
+Rule 6     param_list -> empty
+Rule 7     param -> NAME COLON TYPE
+Rule 8     ret_type -> ARROW TYPE
+Rule 9     ret_type -> empty
+Rule 10    block -> LBRACE statement_list RBRACE
+Rule 11    statement_list -> statement_list statement
+Rule 12    statement_list -> statement
+Rule 13    statement_list -> empty
+Rule 14    statement -> IF expression block else_part
+Rule 15    else_part -> ELSE block
+Rule 16    else_part -> empty
+Rule 17    statement -> FOR NAME IN range block
+Rule 18    range -> NUMBER DOTDOT NUMBER
+Rule 19    statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI
+Rule 20    opt_mut -> MUT
+Rule 21    opt_mut -> empty
+Rule 22    expression -> expression PLUS expression
+Rule 23    expression -> expression MINUS expression
+Rule 24    expression -> expression TIMES expression
+Rule 25    expression -> expression DIVIDE expression
+Rule 26    expression -> expression GT expression
+Rule 27    expression -> expression LT expression
+Rule 28    expression -> expression GE expression
+Rule 29    expression -> expression LE expression
+Rule 30    expression -> expression EQ expression
+Rule 31    expression -> expression NEQ expression
+Rule 32    expression -> LPAREN expression RPAREN
+Rule 33    expression -> NUMBER
+Rule 34    expression -> NAME
+Rule 35    expression -> NAME LPAREN arg_list RPAREN
+Rule 36    arg_list -> arg_list COMMA expression
+Rule 37    arg_list -> expression
+Rule 38    arg_list -> empty
+Rule 39    statement -> expression SEMI
+Rule 40    statement -> RETURN expression SEMI
+Rule 41    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ARROW                : 8
+ASSIGN               : 19
+COLON                : 7 19
+COMMA                : 4 36
+DIVIDE               : 25
+DOTDOT               : 18
+ELSE                 : 15
+EQ                   : 30
+FN                   : 3
+FOR                  : 17
+GE                   : 28
+GT                   : 26
+IF                   : 14
+IN                   : 17
+LBRACE               : 10
+LE                   : 29
+LET                  : 19
+LPAREN               : 3 32 35
+LT                   : 27
+MINUS                : 23
+MUT                  : 20
+NAME                 : 3 7 17 19 34 35
+NEQ                  : 31
+NUMBER               : 18 18 33
+PLUS                 : 22
+RBRACE               : 10
+RETURN               : 40
+RPAREN               : 3 32 35
+SEMI                 : 19 39 40
+TIMES                : 24
+TYPE                 : 7 8 19
+error                : 
+
+Nonterminals, with rules where they appear
+
+arg_list             : 35 36
+block                : 3 14 15 17
+else_part            : 14
+empty                : 6 9 13 16 21 38
+expression           : 14 19 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 29 30 30 31 31 32 36 37 39 40
+function_def         : 2
+opt_mut              : 19
+param                : 4 5
+param_list           : 3 4
+program              : 0
+range                : 17
+ret_type             : 3
+statement            : 11 12
+statement_list       : 1 10 11
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) program -> . function_def
+    (11) statement_list -> . statement_list statement
+    (12) statement_list -> . statement
+    (13) statement_list -> . empty
+    (3) function_def -> . FN NAME LPAREN param_list RPAREN ret_type block
+    (14) statement -> . IF expression block else_part
+    (17) statement -> . FOR NAME IN range block
+    (19) statement -> . LET opt_mut NAME COLON TYPE ASSIGN expression SEMI
+    (39) statement -> . expression SEMI
+    (40) statement -> . RETURN expression SEMI
+    (41) empty -> .
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for LET resolved as shift
+  ! shift/reduce conflict for RETURN resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for NUMBER resolved as shift
+  ! shift/reduce conflict for NAME resolved as shift
+    FN              shift and go to state 6
+    IF              shift and go to state 9
+    FOR             shift and go to state 11
+    LET             shift and go to state 12
+    RETURN          shift and go to state 13
+    $end            reduce using rule 41 (empty -> .)
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+  ! IF              [ reduce using rule 41 (empty -> .) ]
+  ! FOR             [ reduce using rule 41 (empty -> .) ]
+  ! LET             [ reduce using rule 41 (empty -> .) ]
+  ! RETURN          [ reduce using rule 41 (empty -> .) ]
+  ! LPAREN          [ reduce using rule 41 (empty -> .) ]
+  ! NUMBER          [ reduce using rule 41 (empty -> .) ]
+  ! NAME            [ reduce using rule 41 (empty -> .) ]
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    function_def                   shift and go to state 3
+    statement                      shift and go to state 4
+    empty                          shift and go to state 5
+    expression                     shift and go to state 10
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+    (11) statement_list -> statement_list . statement
+    (14) statement -> . IF expression block else_part
+    (17) statement -> . FOR NAME IN range block
+    (19) statement -> . LET opt_mut NAME COLON TYPE ASSIGN expression SEMI
+    (39) statement -> . expression SEMI
+    (40) statement -> . RETURN expression SEMI
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    $end            reduce using rule 1 (program -> statement_list .)
+    IF              shift and go to state 9
+    FOR             shift and go to state 11
+    LET             shift and go to state 12
+    RETURN          shift and go to state 13
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    statement                      shift and go to state 15
+    expression                     shift and go to state 10
+
+state 3
+
+    (2) program -> function_def .
+
+    $end            reduce using rule 2 (program -> function_def .)
+
+
+state 4
+
+    (12) statement_list -> statement .
+
+    IF              reduce using rule 12 (statement_list -> statement .)
+    FOR             reduce using rule 12 (statement_list -> statement .)
+    LET             reduce using rule 12 (statement_list -> statement .)
+    RETURN          reduce using rule 12 (statement_list -> statement .)
+    LPAREN          reduce using rule 12 (statement_list -> statement .)
+    NUMBER          reduce using rule 12 (statement_list -> statement .)
+    NAME            reduce using rule 12 (statement_list -> statement .)
+    $end            reduce using rule 12 (statement_list -> statement .)
+    RBRACE          reduce using rule 12 (statement_list -> statement .)
+
+
+state 5
+
+    (13) statement_list -> empty .
+
+    IF              reduce using rule 13 (statement_list -> empty .)
+    FOR             reduce using rule 13 (statement_list -> empty .)
+    LET             reduce using rule 13 (statement_list -> empty .)
+    RETURN          reduce using rule 13 (statement_list -> empty .)
+    LPAREN          reduce using rule 13 (statement_list -> empty .)
+    NUMBER          reduce using rule 13 (statement_list -> empty .)
+    NAME            reduce using rule 13 (statement_list -> empty .)
+    $end            reduce using rule 13 (statement_list -> empty .)
+    RBRACE          reduce using rule 13 (statement_list -> empty .)
+
+
+state 6
+
+    (3) function_def -> FN . NAME LPAREN param_list RPAREN ret_type block
+
+    NAME            shift and go to state 16
+
+
+state 7
+
+    (34) expression -> NAME .
+    (35) expression -> NAME . LPAREN arg_list RPAREN
+
+    SEMI            reduce using rule 34 (expression -> NAME .)
+    PLUS            reduce using rule 34 (expression -> NAME .)
+    MINUS           reduce using rule 34 (expression -> NAME .)
+    TIMES           reduce using rule 34 (expression -> NAME .)
+    DIVIDE          reduce using rule 34 (expression -> NAME .)
+    GT              reduce using rule 34 (expression -> NAME .)
+    LT              reduce using rule 34 (expression -> NAME .)
+    GE              reduce using rule 34 (expression -> NAME .)
+    LE              reduce using rule 34 (expression -> NAME .)
+    EQ              reduce using rule 34 (expression -> NAME .)
+    NEQ             reduce using rule 34 (expression -> NAME .)
+    RPAREN          reduce using rule 34 (expression -> NAME .)
+    LBRACE          reduce using rule 34 (expression -> NAME .)
+    COMMA           reduce using rule 34 (expression -> NAME .)
+    LPAREN          shift and go to state 17
+
+
+state 8
+
+    (32) expression -> LPAREN . expression RPAREN
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 18
+
+state 9
+
+    (14) statement -> IF . expression block else_part
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 19
+
+state 10
+
+    (39) statement -> expression . SEMI
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            shift and go to state 20
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+
+state 11
+
+    (17) statement -> FOR . NAME IN range block
+
+    NAME            shift and go to state 31
+
+
+state 12
+
+    (19) statement -> LET . opt_mut NAME COLON TYPE ASSIGN expression SEMI
+    (20) opt_mut -> . MUT
+    (21) opt_mut -> . empty
+    (41) empty -> .
+
+    MUT             shift and go to state 33
+    NAME            reduce using rule 41 (empty -> .)
+
+    opt_mut                        shift and go to state 32
+    empty                          shift and go to state 34
+
+state 13
+
+    (40) statement -> RETURN . expression SEMI
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 35
+
+state 14
+
+    (33) expression -> NUMBER .
+
+    SEMI            reduce using rule 33 (expression -> NUMBER .)
+    PLUS            reduce using rule 33 (expression -> NUMBER .)
+    MINUS           reduce using rule 33 (expression -> NUMBER .)
+    TIMES           reduce using rule 33 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 33 (expression -> NUMBER .)
+    GT              reduce using rule 33 (expression -> NUMBER .)
+    LT              reduce using rule 33 (expression -> NUMBER .)
+    GE              reduce using rule 33 (expression -> NUMBER .)
+    LE              reduce using rule 33 (expression -> NUMBER .)
+    EQ              reduce using rule 33 (expression -> NUMBER .)
+    NEQ             reduce using rule 33 (expression -> NUMBER .)
+    RPAREN          reduce using rule 33 (expression -> NUMBER .)
+    LBRACE          reduce using rule 33 (expression -> NUMBER .)
+    COMMA           reduce using rule 33 (expression -> NUMBER .)
+
+
+state 15
+
+    (11) statement_list -> statement_list statement .
+
+    IF              reduce using rule 11 (statement_list -> statement_list statement .)
+    FOR             reduce using rule 11 (statement_list -> statement_list statement .)
+    LET             reduce using rule 11 (statement_list -> statement_list statement .)
+    RETURN          reduce using rule 11 (statement_list -> statement_list statement .)
+    LPAREN          reduce using rule 11 (statement_list -> statement_list statement .)
+    NUMBER          reduce using rule 11 (statement_list -> statement_list statement .)
+    NAME            reduce using rule 11 (statement_list -> statement_list statement .)
+    $end            reduce using rule 11 (statement_list -> statement_list statement .)
+    RBRACE          reduce using rule 11 (statement_list -> statement_list statement .)
+
+
+state 16
+
+    (3) function_def -> FN NAME . LPAREN param_list RPAREN ret_type block
+
+    LPAREN          shift and go to state 36
+
+
+state 17
+
+    (35) expression -> NAME LPAREN . arg_list RPAREN
+    (36) arg_list -> . arg_list COMMA expression
+    (37) arg_list -> . expression
+    (38) arg_list -> . empty
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+    (41) empty -> .
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+    RPAREN          reduce using rule 41 (empty -> .)
+    COMMA           reduce using rule 41 (empty -> .)
+
+    arg_list                       shift and go to state 37
+    expression                     shift and go to state 38
+    empty                          shift and go to state 39
+
+state 18
+
+    (32) expression -> LPAREN expression . RPAREN
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    RPAREN          shift and go to state 40
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+
+state 19
+
+    (14) statement -> IF expression . block else_part
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+    (10) block -> . LBRACE statement_list RBRACE
+
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+    LBRACE          shift and go to state 42
+
+    block                          shift and go to state 41
+
+state 20
+
+    (39) statement -> expression SEMI .
+
+    IF              reduce using rule 39 (statement -> expression SEMI .)
+    FOR             reduce using rule 39 (statement -> expression SEMI .)
+    LET             reduce using rule 39 (statement -> expression SEMI .)
+    RETURN          reduce using rule 39 (statement -> expression SEMI .)
+    LPAREN          reduce using rule 39 (statement -> expression SEMI .)
+    NUMBER          reduce using rule 39 (statement -> expression SEMI .)
+    NAME            reduce using rule 39 (statement -> expression SEMI .)
+    $end            reduce using rule 39 (statement -> expression SEMI .)
+    RBRACE          reduce using rule 39 (statement -> expression SEMI .)
+
+
+state 21
+
+    (22) expression -> expression PLUS . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 43
+
+state 22
+
+    (23) expression -> expression MINUS . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 44
+
+state 23
+
+    (24) expression -> expression TIMES . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 45
+
+state 24
+
+    (25) expression -> expression DIVIDE . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 46
+
+state 25
+
+    (26) expression -> expression GT . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 47
+
+state 26
+
+    (27) expression -> expression LT . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 48
+
+state 27
+
+    (28) expression -> expression GE . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 49
+
+state 28
+
+    (29) expression -> expression LE . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 50
+
+state 29
+
+    (30) expression -> expression EQ . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 51
+
+state 30
+
+    (31) expression -> expression NEQ . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 52
+
+state 31
+
+    (17) statement -> FOR NAME . IN range block
+
+    IN              shift and go to state 53
+
+
+state 32
+
+    (19) statement -> LET opt_mut . NAME COLON TYPE ASSIGN expression SEMI
+
+    NAME            shift and go to state 54
+
+
+state 33
+
+    (20) opt_mut -> MUT .
+
+    NAME            reduce using rule 20 (opt_mut -> MUT .)
+
+
+state 34
+
+    (21) opt_mut -> empty .
+
+    NAME            reduce using rule 21 (opt_mut -> empty .)
+
+
+state 35
+
+    (40) statement -> RETURN expression . SEMI
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            shift and go to state 55
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+
+state 36
+
+    (3) function_def -> FN NAME LPAREN . param_list RPAREN ret_type block
+    (4) param_list -> . param_list COMMA param
+    (5) param_list -> . param
+    (6) param_list -> . empty
+    (7) param -> . NAME COLON TYPE
+    (41) empty -> .
+
+    NAME            shift and go to state 56
+    RPAREN          reduce using rule 41 (empty -> .)
+    COMMA           reduce using rule 41 (empty -> .)
+
+    param_list                     shift and go to state 57
+    param                          shift and go to state 58
+    empty                          shift and go to state 59
+
+state 37
+
+    (35) expression -> NAME LPAREN arg_list . RPAREN
+    (36) arg_list -> arg_list . COMMA expression
+
+    RPAREN          shift and go to state 60
+    COMMA           shift and go to state 61
+
+
+state 38
+
+    (37) arg_list -> expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    RPAREN          reduce using rule 37 (arg_list -> expression .)
+    COMMA           reduce using rule 37 (arg_list -> expression .)
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+
+state 39
+
+    (38) arg_list -> empty .
+
+    RPAREN          reduce using rule 38 (arg_list -> empty .)
+    COMMA           reduce using rule 38 (arg_list -> empty .)
+
+
+state 40
+
+    (32) expression -> LPAREN expression RPAREN .
+
+    SEMI            reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    GT              reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    LT              reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    GE              reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    LE              reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    EQ              reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    NEQ             reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    LBRACE          reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+
+
+state 41
+
+    (14) statement -> IF expression block . else_part
+    (15) else_part -> . ELSE block
+    (16) else_part -> . empty
+    (41) empty -> .
+
+    ELSE            shift and go to state 63
+    IF              reduce using rule 41 (empty -> .)
+    FOR             reduce using rule 41 (empty -> .)
+    LET             reduce using rule 41 (empty -> .)
+    RETURN          reduce using rule 41 (empty -> .)
+    LPAREN          reduce using rule 41 (empty -> .)
+    NUMBER          reduce using rule 41 (empty -> .)
+    NAME            reduce using rule 41 (empty -> .)
+    $end            reduce using rule 41 (empty -> .)
+    RBRACE          reduce using rule 41 (empty -> .)
+
+    else_part                      shift and go to state 62
+    empty                          shift and go to state 64
+
+state 42
+
+    (10) block -> LBRACE . statement_list RBRACE
+    (11) statement_list -> . statement_list statement
+    (12) statement_list -> . statement
+    (13) statement_list -> . empty
+    (14) statement -> . IF expression block else_part
+    (17) statement -> . FOR NAME IN range block
+    (19) statement -> . LET opt_mut NAME COLON TYPE ASSIGN expression SEMI
+    (39) statement -> . expression SEMI
+    (40) statement -> . RETURN expression SEMI
+    (41) empty -> .
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+  ! shift/reduce conflict for LET resolved as shift
+  ! shift/reduce conflict for RETURN resolved as shift
+  ! shift/reduce conflict for LPAREN resolved as shift
+  ! shift/reduce conflict for NUMBER resolved as shift
+  ! shift/reduce conflict for NAME resolved as shift
+    IF              shift and go to state 9
+    FOR             shift and go to state 11
+    LET             shift and go to state 12
+    RETURN          shift and go to state 13
+    RBRACE          reduce using rule 41 (empty -> .)
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+  ! IF              [ reduce using rule 41 (empty -> .) ]
+  ! FOR             [ reduce using rule 41 (empty -> .) ]
+  ! LET             [ reduce using rule 41 (empty -> .) ]
+  ! RETURN          [ reduce using rule 41 (empty -> .) ]
+  ! LPAREN          [ reduce using rule 41 (empty -> .) ]
+  ! NUMBER          [ reduce using rule 41 (empty -> .) ]
+  ! NAME            [ reduce using rule 41 (empty -> .) ]
+
+    statement_list                 shift and go to state 65
+    statement                      shift and go to state 4
+    empty                          shift and go to state 5
+    expression                     shift and go to state 10
+
+state 43
+
+    (22) expression -> expression PLUS expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 22 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 22 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 22 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 22 (expression -> expression PLUS expression .)
+    LBRACE          reduce using rule 22 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 22 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+  ! TIMES           [ reduce using rule 22 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 22 (expression -> expression PLUS expression .) ]
+  ! GT              [ reduce using rule 22 (expression -> expression PLUS expression .) ]
+  ! LT              [ reduce using rule 22 (expression -> expression PLUS expression .) ]
+  ! GE              [ reduce using rule 22 (expression -> expression PLUS expression .) ]
+  ! LE              [ reduce using rule 22 (expression -> expression PLUS expression .) ]
+  ! EQ              [ reduce using rule 22 (expression -> expression PLUS expression .) ]
+  ! NEQ             [ reduce using rule 22 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+
+
+state 44
+
+    (23) expression -> expression MINUS expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 23 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 23 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 23 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 23 (expression -> expression MINUS expression .)
+    LBRACE          reduce using rule 23 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 23 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+  ! TIMES           [ reduce using rule 23 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 23 (expression -> expression MINUS expression .) ]
+  ! GT              [ reduce using rule 23 (expression -> expression MINUS expression .) ]
+  ! LT              [ reduce using rule 23 (expression -> expression MINUS expression .) ]
+  ! GE              [ reduce using rule 23 (expression -> expression MINUS expression .) ]
+  ! LE              [ reduce using rule 23 (expression -> expression MINUS expression .) ]
+  ! EQ              [ reduce using rule 23 (expression -> expression MINUS expression .) ]
+  ! NEQ             [ reduce using rule 23 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+
+
+state 45
+
+    (24) expression -> expression TIMES expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 24 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 24 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 24 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 24 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 24 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 24 (expression -> expression TIMES expression .)
+    LBRACE          reduce using rule 24 (expression -> expression TIMES expression .)
+    COMMA           reduce using rule 24 (expression -> expression TIMES expression .)
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+  ! GT              [ reduce using rule 24 (expression -> expression TIMES expression .) ]
+  ! LT              [ reduce using rule 24 (expression -> expression TIMES expression .) ]
+  ! GE              [ reduce using rule 24 (expression -> expression TIMES expression .) ]
+  ! LE              [ reduce using rule 24 (expression -> expression TIMES expression .) ]
+  ! EQ              [ reduce using rule 24 (expression -> expression TIMES expression .) ]
+  ! NEQ             [ reduce using rule 24 (expression -> expression TIMES expression .) ]
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+
+
+state 46
+
+    (25) expression -> expression DIVIDE expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 25 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 25 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 25 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 25 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 25 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 25 (expression -> expression DIVIDE expression .)
+    LBRACE          reduce using rule 25 (expression -> expression DIVIDE expression .)
+    COMMA           reduce using rule 25 (expression -> expression DIVIDE expression .)
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+  ! GT              [ reduce using rule 25 (expression -> expression DIVIDE expression .) ]
+  ! LT              [ reduce using rule 25 (expression -> expression DIVIDE expression .) ]
+  ! GE              [ reduce using rule 25 (expression -> expression DIVIDE expression .) ]
+  ! LE              [ reduce using rule 25 (expression -> expression DIVIDE expression .) ]
+  ! EQ              [ reduce using rule 25 (expression -> expression DIVIDE expression .) ]
+  ! NEQ             [ reduce using rule 25 (expression -> expression DIVIDE expression .) ]
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+
+
+state 47
+
+    (26) expression -> expression GT expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 26 (expression -> expression GT expression .)
+    PLUS            reduce using rule 26 (expression -> expression GT expression .)
+    MINUS           reduce using rule 26 (expression -> expression GT expression .)
+    TIMES           reduce using rule 26 (expression -> expression GT expression .)
+    DIVIDE          reduce using rule 26 (expression -> expression GT expression .)
+    GT              reduce using rule 26 (expression -> expression GT expression .)
+    LT              reduce using rule 26 (expression -> expression GT expression .)
+    GE              reduce using rule 26 (expression -> expression GT expression .)
+    LE              reduce using rule 26 (expression -> expression GT expression .)
+    EQ              reduce using rule 26 (expression -> expression GT expression .)
+    NEQ             reduce using rule 26 (expression -> expression GT expression .)
+    RPAREN          reduce using rule 26 (expression -> expression GT expression .)
+    LBRACE          reduce using rule 26 (expression -> expression GT expression .)
+    COMMA           reduce using rule 26 (expression -> expression GT expression .)
+
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! GT              [ shift and go to state 25 ]
+  ! LT              [ shift and go to state 26 ]
+  ! GE              [ shift and go to state 27 ]
+  ! LE              [ shift and go to state 28 ]
+  ! EQ              [ shift and go to state 29 ]
+  ! NEQ             [ shift and go to state 30 ]
+
+
+state 48
+
+    (27) expression -> expression LT expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 27 (expression -> expression LT expression .)
+    PLUS            reduce using rule 27 (expression -> expression LT expression .)
+    MINUS           reduce using rule 27 (expression -> expression LT expression .)
+    TIMES           reduce using rule 27 (expression -> expression LT expression .)
+    DIVIDE          reduce using rule 27 (expression -> expression LT expression .)
+    GT              reduce using rule 27 (expression -> expression LT expression .)
+    LT              reduce using rule 27 (expression -> expression LT expression .)
+    GE              reduce using rule 27 (expression -> expression LT expression .)
+    LE              reduce using rule 27 (expression -> expression LT expression .)
+    EQ              reduce using rule 27 (expression -> expression LT expression .)
+    NEQ             reduce using rule 27 (expression -> expression LT expression .)
+    RPAREN          reduce using rule 27 (expression -> expression LT expression .)
+    LBRACE          reduce using rule 27 (expression -> expression LT expression .)
+    COMMA           reduce using rule 27 (expression -> expression LT expression .)
+
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! GT              [ shift and go to state 25 ]
+  ! LT              [ shift and go to state 26 ]
+  ! GE              [ shift and go to state 27 ]
+  ! LE              [ shift and go to state 28 ]
+  ! EQ              [ shift and go to state 29 ]
+  ! NEQ             [ shift and go to state 30 ]
+
+
+state 49
+
+    (28) expression -> expression GE expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 28 (expression -> expression GE expression .)
+    PLUS            reduce using rule 28 (expression -> expression GE expression .)
+    MINUS           reduce using rule 28 (expression -> expression GE expression .)
+    TIMES           reduce using rule 28 (expression -> expression GE expression .)
+    DIVIDE          reduce using rule 28 (expression -> expression GE expression .)
+    GT              reduce using rule 28 (expression -> expression GE expression .)
+    LT              reduce using rule 28 (expression -> expression GE expression .)
+    GE              reduce using rule 28 (expression -> expression GE expression .)
+    LE              reduce using rule 28 (expression -> expression GE expression .)
+    EQ              reduce using rule 28 (expression -> expression GE expression .)
+    NEQ             reduce using rule 28 (expression -> expression GE expression .)
+    RPAREN          reduce using rule 28 (expression -> expression GE expression .)
+    LBRACE          reduce using rule 28 (expression -> expression GE expression .)
+    COMMA           reduce using rule 28 (expression -> expression GE expression .)
+
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! GT              [ shift and go to state 25 ]
+  ! LT              [ shift and go to state 26 ]
+  ! GE              [ shift and go to state 27 ]
+  ! LE              [ shift and go to state 28 ]
+  ! EQ              [ shift and go to state 29 ]
+  ! NEQ             [ shift and go to state 30 ]
+
+
+state 50
+
+    (29) expression -> expression LE expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 29 (expression -> expression LE expression .)
+    PLUS            reduce using rule 29 (expression -> expression LE expression .)
+    MINUS           reduce using rule 29 (expression -> expression LE expression .)
+    TIMES           reduce using rule 29 (expression -> expression LE expression .)
+    DIVIDE          reduce using rule 29 (expression -> expression LE expression .)
+    GT              reduce using rule 29 (expression -> expression LE expression .)
+    LT              reduce using rule 29 (expression -> expression LE expression .)
+    GE              reduce using rule 29 (expression -> expression LE expression .)
+    LE              reduce using rule 29 (expression -> expression LE expression .)
+    EQ              reduce using rule 29 (expression -> expression LE expression .)
+    NEQ             reduce using rule 29 (expression -> expression LE expression .)
+    RPAREN          reduce using rule 29 (expression -> expression LE expression .)
+    LBRACE          reduce using rule 29 (expression -> expression LE expression .)
+    COMMA           reduce using rule 29 (expression -> expression LE expression .)
+
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! GT              [ shift and go to state 25 ]
+  ! LT              [ shift and go to state 26 ]
+  ! GE              [ shift and go to state 27 ]
+  ! LE              [ shift and go to state 28 ]
+  ! EQ              [ shift and go to state 29 ]
+  ! NEQ             [ shift and go to state 30 ]
+
+
+state 51
+
+    (30) expression -> expression EQ expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 30 (expression -> expression EQ expression .)
+    PLUS            reduce using rule 30 (expression -> expression EQ expression .)
+    MINUS           reduce using rule 30 (expression -> expression EQ expression .)
+    TIMES           reduce using rule 30 (expression -> expression EQ expression .)
+    DIVIDE          reduce using rule 30 (expression -> expression EQ expression .)
+    GT              reduce using rule 30 (expression -> expression EQ expression .)
+    LT              reduce using rule 30 (expression -> expression EQ expression .)
+    GE              reduce using rule 30 (expression -> expression EQ expression .)
+    LE              reduce using rule 30 (expression -> expression EQ expression .)
+    EQ              reduce using rule 30 (expression -> expression EQ expression .)
+    NEQ             reduce using rule 30 (expression -> expression EQ expression .)
+    RPAREN          reduce using rule 30 (expression -> expression EQ expression .)
+    LBRACE          reduce using rule 30 (expression -> expression EQ expression .)
+    COMMA           reduce using rule 30 (expression -> expression EQ expression .)
+
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! GT              [ shift and go to state 25 ]
+  ! LT              [ shift and go to state 26 ]
+  ! GE              [ shift and go to state 27 ]
+  ! LE              [ shift and go to state 28 ]
+  ! EQ              [ shift and go to state 29 ]
+  ! NEQ             [ shift and go to state 30 ]
+
+
+state 52
+
+    (31) expression -> expression NEQ expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            reduce using rule 31 (expression -> expression NEQ expression .)
+    PLUS            reduce using rule 31 (expression -> expression NEQ expression .)
+    MINUS           reduce using rule 31 (expression -> expression NEQ expression .)
+    TIMES           reduce using rule 31 (expression -> expression NEQ expression .)
+    DIVIDE          reduce using rule 31 (expression -> expression NEQ expression .)
+    GT              reduce using rule 31 (expression -> expression NEQ expression .)
+    LT              reduce using rule 31 (expression -> expression NEQ expression .)
+    GE              reduce using rule 31 (expression -> expression NEQ expression .)
+    LE              reduce using rule 31 (expression -> expression NEQ expression .)
+    EQ              reduce using rule 31 (expression -> expression NEQ expression .)
+    NEQ             reduce using rule 31 (expression -> expression NEQ expression .)
+    RPAREN          reduce using rule 31 (expression -> expression NEQ expression .)
+    LBRACE          reduce using rule 31 (expression -> expression NEQ expression .)
+    COMMA           reduce using rule 31 (expression -> expression NEQ expression .)
+
+  ! PLUS            [ shift and go to state 21 ]
+  ! MINUS           [ shift and go to state 22 ]
+  ! TIMES           [ shift and go to state 23 ]
+  ! DIVIDE          [ shift and go to state 24 ]
+  ! GT              [ shift and go to state 25 ]
+  ! LT              [ shift and go to state 26 ]
+  ! GE              [ shift and go to state 27 ]
+  ! LE              [ shift and go to state 28 ]
+  ! EQ              [ shift and go to state 29 ]
+  ! NEQ             [ shift and go to state 30 ]
+
+
+state 53
+
+    (17) statement -> FOR NAME IN . range block
+    (18) range -> . NUMBER DOTDOT NUMBER
+
+    NUMBER          shift and go to state 67
+
+    range                          shift and go to state 66
+
+state 54
+
+    (19) statement -> LET opt_mut NAME . COLON TYPE ASSIGN expression SEMI
+
+    COLON           shift and go to state 68
+
+
+state 55
+
+    (40) statement -> RETURN expression SEMI .
+
+    IF              reduce using rule 40 (statement -> RETURN expression SEMI .)
+    FOR             reduce using rule 40 (statement -> RETURN expression SEMI .)
+    LET             reduce using rule 40 (statement -> RETURN expression SEMI .)
+    RETURN          reduce using rule 40 (statement -> RETURN expression SEMI .)
+    LPAREN          reduce using rule 40 (statement -> RETURN expression SEMI .)
+    NUMBER          reduce using rule 40 (statement -> RETURN expression SEMI .)
+    NAME            reduce using rule 40 (statement -> RETURN expression SEMI .)
+    $end            reduce using rule 40 (statement -> RETURN expression SEMI .)
+    RBRACE          reduce using rule 40 (statement -> RETURN expression SEMI .)
+
+
+state 56
+
+    (7) param -> NAME . COLON TYPE
+
+    COLON           shift and go to state 69
+
+
+state 57
+
+    (3) function_def -> FN NAME LPAREN param_list . RPAREN ret_type block
+    (4) param_list -> param_list . COMMA param
+
+    RPAREN          shift and go to state 70
+    COMMA           shift and go to state 71
+
+
+state 58
+
+    (5) param_list -> param .
+
+    RPAREN          reduce using rule 5 (param_list -> param .)
+    COMMA           reduce using rule 5 (param_list -> param .)
+
+
+state 59
+
+    (6) param_list -> empty .
+
+    RPAREN          reduce using rule 6 (param_list -> empty .)
+    COMMA           reduce using rule 6 (param_list -> empty .)
+
+
+state 60
+
+    (35) expression -> NAME LPAREN arg_list RPAREN .
+
+    SEMI            reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    PLUS            reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    MINUS           reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    TIMES           reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    DIVIDE          reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    GT              reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    LT              reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    GE              reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    LE              reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    EQ              reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    NEQ             reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    RPAREN          reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    LBRACE          reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+    COMMA           reduce using rule 35 (expression -> NAME LPAREN arg_list RPAREN .)
+
+
+state 61
+
+    (36) arg_list -> arg_list COMMA . expression
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 72
+
+state 62
+
+    (14) statement -> IF expression block else_part .
+
+    IF              reduce using rule 14 (statement -> IF expression block else_part .)
+    FOR             reduce using rule 14 (statement -> IF expression block else_part .)
+    LET             reduce using rule 14 (statement -> IF expression block else_part .)
+    RETURN          reduce using rule 14 (statement -> IF expression block else_part .)
+    LPAREN          reduce using rule 14 (statement -> IF expression block else_part .)
+    NUMBER          reduce using rule 14 (statement -> IF expression block else_part .)
+    NAME            reduce using rule 14 (statement -> IF expression block else_part .)
+    $end            reduce using rule 14 (statement -> IF expression block else_part .)
+    RBRACE          reduce using rule 14 (statement -> IF expression block else_part .)
+
+
+state 63
+
+    (15) else_part -> ELSE . block
+    (10) block -> . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 42
+
+    block                          shift and go to state 73
+
+state 64
+
+    (16) else_part -> empty .
+
+    IF              reduce using rule 16 (else_part -> empty .)
+    FOR             reduce using rule 16 (else_part -> empty .)
+    LET             reduce using rule 16 (else_part -> empty .)
+    RETURN          reduce using rule 16 (else_part -> empty .)
+    LPAREN          reduce using rule 16 (else_part -> empty .)
+    NUMBER          reduce using rule 16 (else_part -> empty .)
+    NAME            reduce using rule 16 (else_part -> empty .)
+    $end            reduce using rule 16 (else_part -> empty .)
+    RBRACE          reduce using rule 16 (else_part -> empty .)
+
+
+state 65
+
+    (10) block -> LBRACE statement_list . RBRACE
+    (11) statement_list -> statement_list . statement
+    (14) statement -> . IF expression block else_part
+    (17) statement -> . FOR NAME IN range block
+    (19) statement -> . LET opt_mut NAME COLON TYPE ASSIGN expression SEMI
+    (39) statement -> . expression SEMI
+    (40) statement -> . RETURN expression SEMI
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    RBRACE          shift and go to state 74
+    IF              shift and go to state 9
+    FOR             shift and go to state 11
+    LET             shift and go to state 12
+    RETURN          shift and go to state 13
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    statement                      shift and go to state 15
+    expression                     shift and go to state 10
+
+state 66
+
+    (17) statement -> FOR NAME IN range . block
+    (10) block -> . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 42
+
+    block                          shift and go to state 75
+
+state 67
+
+    (18) range -> NUMBER . DOTDOT NUMBER
+
+    DOTDOT          shift and go to state 76
+
+
+state 68
+
+    (19) statement -> LET opt_mut NAME COLON . TYPE ASSIGN expression SEMI
+
+    TYPE            shift and go to state 77
+
+
+state 69
+
+    (7) param -> NAME COLON . TYPE
+
+    TYPE            shift and go to state 78
+
+
+state 70
+
+    (3) function_def -> FN NAME LPAREN param_list RPAREN . ret_type block
+    (8) ret_type -> . ARROW TYPE
+    (9) ret_type -> . empty
+    (41) empty -> .
+
+    ARROW           shift and go to state 80
+    LBRACE          reduce using rule 41 (empty -> .)
+
+    ret_type                       shift and go to state 79
+    empty                          shift and go to state 81
+
+state 71
+
+    (4) param_list -> param_list COMMA . param
+    (7) param -> . NAME COLON TYPE
+
+    NAME            shift and go to state 56
+
+    param                          shift and go to state 82
+
+state 72
+
+    (36) arg_list -> arg_list COMMA expression .
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    RPAREN          reduce using rule 36 (arg_list -> arg_list COMMA expression .)
+    COMMA           reduce using rule 36 (arg_list -> arg_list COMMA expression .)
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+
+state 73
+
+    (15) else_part -> ELSE block .
+
+    IF              reduce using rule 15 (else_part -> ELSE block .)
+    FOR             reduce using rule 15 (else_part -> ELSE block .)
+    LET             reduce using rule 15 (else_part -> ELSE block .)
+    RETURN          reduce using rule 15 (else_part -> ELSE block .)
+    LPAREN          reduce using rule 15 (else_part -> ELSE block .)
+    NUMBER          reduce using rule 15 (else_part -> ELSE block .)
+    NAME            reduce using rule 15 (else_part -> ELSE block .)
+    $end            reduce using rule 15 (else_part -> ELSE block .)
+    RBRACE          reduce using rule 15 (else_part -> ELSE block .)
+
+
+state 74
+
+    (10) block -> LBRACE statement_list RBRACE .
+
+    ELSE            reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+    IF              reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+    FOR             reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+    LET             reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+    RETURN          reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+    LPAREN          reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+    NUMBER          reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+    NAME            reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+    $end            reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+    RBRACE          reduce using rule 10 (block -> LBRACE statement_list RBRACE .)
+
+
+state 75
+
+    (17) statement -> FOR NAME IN range block .
+
+    IF              reduce using rule 17 (statement -> FOR NAME IN range block .)
+    FOR             reduce using rule 17 (statement -> FOR NAME IN range block .)
+    LET             reduce using rule 17 (statement -> FOR NAME IN range block .)
+    RETURN          reduce using rule 17 (statement -> FOR NAME IN range block .)
+    LPAREN          reduce using rule 17 (statement -> FOR NAME IN range block .)
+    NUMBER          reduce using rule 17 (statement -> FOR NAME IN range block .)
+    NAME            reduce using rule 17 (statement -> FOR NAME IN range block .)
+    $end            reduce using rule 17 (statement -> FOR NAME IN range block .)
+    RBRACE          reduce using rule 17 (statement -> FOR NAME IN range block .)
+
+
+state 76
+
+    (18) range -> NUMBER DOTDOT . NUMBER
+
+    NUMBER          shift and go to state 83
+
+
+state 77
+
+    (19) statement -> LET opt_mut NAME COLON TYPE . ASSIGN expression SEMI
+
+    ASSIGN          shift and go to state 84
+
+
+state 78
+
+    (7) param -> NAME COLON TYPE .
+
+    RPAREN          reduce using rule 7 (param -> NAME COLON TYPE .)
+    COMMA           reduce using rule 7 (param -> NAME COLON TYPE .)
+
+
+state 79
+
+    (3) function_def -> FN NAME LPAREN param_list RPAREN ret_type . block
+    (10) block -> . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 42
+
+    block                          shift and go to state 85
+
+state 80
+
+    (8) ret_type -> ARROW . TYPE
+
+    TYPE            shift and go to state 86
+
+
+state 81
+
+    (9) ret_type -> empty .
+
+    LBRACE          reduce using rule 9 (ret_type -> empty .)
+
+
+state 82
+
+    (4) param_list -> param_list COMMA param .
+
+    RPAREN          reduce using rule 4 (param_list -> param_list COMMA param .)
+    COMMA           reduce using rule 4 (param_list -> param_list COMMA param .)
+
+
+state 83
+
+    (18) range -> NUMBER DOTDOT NUMBER .
+
+    LBRACE          reduce using rule 18 (range -> NUMBER DOTDOT NUMBER .)
+
+
+state 84
+
+    (19) statement -> LET opt_mut NAME COLON TYPE ASSIGN . expression SEMI
+    (22) expression -> . expression PLUS expression
+    (23) expression -> . expression MINUS expression
+    (24) expression -> . expression TIMES expression
+    (25) expression -> . expression DIVIDE expression
+    (26) expression -> . expression GT expression
+    (27) expression -> . expression LT expression
+    (28) expression -> . expression GE expression
+    (29) expression -> . expression LE expression
+    (30) expression -> . expression EQ expression
+    (31) expression -> . expression NEQ expression
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . NUMBER
+    (34) expression -> . NAME
+    (35) expression -> . NAME LPAREN arg_list RPAREN
+
+    LPAREN          shift and go to state 8
+    NUMBER          shift and go to state 14
+    NAME            shift and go to state 7
+
+    expression                     shift and go to state 87
+
+state 85
+
+    (3) function_def -> FN NAME LPAREN param_list RPAREN ret_type block .
+
+    $end            reduce using rule 3 (function_def -> FN NAME LPAREN param_list RPAREN ret_type block .)
+
+
+state 86
+
+    (8) ret_type -> ARROW TYPE .
+
+    LBRACE          reduce using rule 8 (ret_type -> ARROW TYPE .)
+
+
+state 87
+
+    (19) statement -> LET opt_mut NAME COLON TYPE ASSIGN expression . SEMI
+    (22) expression -> expression . PLUS expression
+    (23) expression -> expression . MINUS expression
+    (24) expression -> expression . TIMES expression
+    (25) expression -> expression . DIVIDE expression
+    (26) expression -> expression . GT expression
+    (27) expression -> expression . LT expression
+    (28) expression -> expression . GE expression
+    (29) expression -> expression . LE expression
+    (30) expression -> expression . EQ expression
+    (31) expression -> expression . NEQ expression
+
+    SEMI            shift and go to state 88
+    PLUS            shift and go to state 21
+    MINUS           shift and go to state 22
+    TIMES           shift and go to state 23
+    DIVIDE          shift and go to state 24
+    GT              shift and go to state 25
+    LT              shift and go to state 26
+    GE              shift and go to state 27
+    LE              shift and go to state 28
+    EQ              shift and go to state 29
+    NEQ             shift and go to state 30
+
+
+state 88
+
+    (19) statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .
+
+    IF              reduce using rule 19 (statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .)
+    FOR             reduce using rule 19 (statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .)
+    LET             reduce using rule 19 (statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .)
+    RETURN          reduce using rule 19 (statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .)
+    LPAREN          reduce using rule 19 (statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .)
+    NUMBER          reduce using rule 19 (statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .)
+    NAME            reduce using rule 19 (statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .)
+    $end            reduce using rule 19 (statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .)
+    RBRACE          reduce using rule 19 (statement -> LET opt_mut NAME COLON TYPE ASSIGN expression SEMI .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for IF in state 0 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 0 resolved as shift
+WARNING: shift/reduce conflict for LET in state 0 resolved as shift
+WARNING: shift/reduce conflict for RETURN in state 0 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 0 resolved as shift
+WARNING: shift/reduce conflict for NUMBER in state 0 resolved as shift
+WARNING: shift/reduce conflict for NAME in state 0 resolved as shift
+WARNING: shift/reduce conflict for IF in state 42 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 42 resolved as shift
+WARNING: shift/reduce conflict for LET in state 42 resolved as shift
+WARNING: shift/reduce conflict for RETURN in state 42 resolved as shift
+WARNING: shift/reduce conflict for LPAREN in state 42 resolved as shift
+WARNING: shift/reduce conflict for NUMBER in state 42 resolved as shift
+WARNING: shift/reduce conflict for NAME in state 42 resolved as shift

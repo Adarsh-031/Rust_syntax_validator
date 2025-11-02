@@ -1,0 +1,60 @@
+Testing input: fn add(x: i32, y: i32) -> i32 { x + y; }
+Valid function definition
+Parsing succeeded
+
+Testing input: fn multiply(a, b) { a * b }
+Syntax error at ','
+Syntax error at '}'
+Parsing failed with errors:
+Syntax error at ','
+Syntax error at '}'
+
+Testing input: if x > y { return x; } else { return y; }
+Valid if-else statement
+Parsing succeeded
+
+Testing input: if x > y: { x } else { y }
+Syntax error at ':'
+Parsing failed with errors:
+Syntax error at ':'
+
+Testing input: for i in 0..10 {i; }
+Valid for loop
+Parsing succeeded
+
+Testing input: for i in range(0, 10) { i }
+Syntax error at 'range'
+Parsing failed with errors:
+Syntax error at 'range'
+
+Testing input: let mut counter: i32 = 0;
+Valid variable declaration
+Parsing succeeded
+
+Testing input: let y i32 = 10;
+Syntax error at 'i32'
+Parsing failed with errors:
+Syntax error at 'i32'
+
+Testing input: let mut 2count: i32 = 0;
+Syntax error at '2'
+Parsing failed with errors:
+Syntax error at '2'
+
+Testing input: let result: i32 = add(10, 20);
+Valid function call expression
+Valid variable declaration
+Parsing succeeded
+
+Testing input: result = add(10 20);
+Syntax error at '='
+Syntax error at '20'
+Parsing failed with errors:
+Syntax error at '='
+Syntax error at '20'
+
+Testing input: add(10, );
+Syntax error at ')'
+Parsing failed with errors:
+Syntax error at ')'
+
